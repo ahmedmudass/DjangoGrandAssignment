@@ -11,4 +11,5 @@ urlpatterns = [
     path("Blog.html", views.Blog, name="blog"),
     path("blog-details.html", views.Blog_details, name="blog-details"),
     path("Contact.html", views.Contact, name="con"),
+    path('logout', views.logout_view, name='logout')
 ]

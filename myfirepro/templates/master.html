@@ -60,8 +60,12 @@
       <div class="ms-3">
         {% if email %}
           <span class="text-dark fw-bold">{{ email }}</span>
+          <form action="/logout" method="POST" style="display:inline;">
+           {% csrf_token %}
+           <button type="submit" class="btn btn-outline-danger btn-sm ms-2">Logout</button>
+          </form>
         {% else %}
-          <a href="/login" class="btn btn-outline-primary btn-sm">Login</a>
+           <a href="/l" class="btn btn-outline-primary btn-sm">Login</a>
         {% endif %}
       </div>
 

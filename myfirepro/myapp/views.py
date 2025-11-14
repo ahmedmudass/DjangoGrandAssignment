@@ -2,8 +2,9 @@ from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import render, redirect
 import requests
+from django.views.decorators.cache import never_cache
 from myfirepro.firebase_config import db
-
+from django.contrib.auth import logout
 
 def Register(request):
     if request.method=="POST":
@@ -77,8 +78,11 @@ def login(req):
             return redirect("log")
     return render(req,"myapp/login.html")
 
+@never_cache
 def Index(request):
     email = request.session.get("email")
+    if not email:
+        return redirect("login")
     return render(request,"myapp/Index.html",{"email": email})
 
 
@@ -114,3 +118,8 @@ def Contact(request):
         return redirect("con")
 
     return render(request, "myapp/Contact.html")
+
+def logout_view(request):
+    logout(request)
+    request.session.flush()
+    return redirect('/login')
